@@ -11,6 +11,8 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import java.awt.FlowLayout;
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JMenuBar;
@@ -41,6 +43,9 @@ public class MainGUIWindow {
 	private JTextField textField;
 	private JTextField textField_1;
 	private JTextField textField_2;
+	private JTable table_4;
+	private JTextField textField_3;
+	private JTextField textField_4;
 
 	/**
 	 * Launch the application.
@@ -193,6 +198,15 @@ public class MainGUIWindow {
 		CreatePlayersPanel.add(panel, BorderLayout.CENTER);
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 		
+		JLabel lblSelectExistingPlayer = new JLabel("Select Existing Player to Modify:");
+		panel.add(lblSelectExistingPlayer);
+		
+		JPanel existingPlayersPanel = new JPanel();
+		panel.add(existingPlayersPanel);
+		
+		table_4 = new JTable();
+		existingPlayersPanel.add(table_4);
+		
 		JLabel lblEnterPlayerInformation = new JLabel("Enter Player Information:");
 		panel.add(lblEnterPlayerInformation);
 		
@@ -216,18 +230,47 @@ public class MainGUIWindow {
 		textField_1.setColumns(10);
 		numberPanel.add(textField_1);
 		
-		JPanel panel_1 = new JPanel();
-		panel.add(panel_1);
+		JPanel preferedPositionPanel = new JPanel();
+		panel.add(preferedPositionPanel);
 		
 		JLabel lblPreferedPositionif = new JLabel("Prefered Position (if applicable)");
-		panel_1.add(lblPreferedPositionif);
+		preferedPositionPanel.add(lblPreferedPositionif);
 		
 		textField_2 = new JTextField();
 		textField_2.setColumns(10);
-		panel_1.add(textField_2);
+		preferedPositionPanel.add(textField_2);
+		
+		JPanel heightPanel = new JPanel();
+		panel.add(heightPanel);
+		
+		JLabel lblPlayerHeight = new JLabel("Player Height:");
+		heightPanel.add(lblPlayerHeight);
+		
+		textField_3 = new JTextField();
+		textField_3.setColumns(10);
+		heightPanel.add(textField_3);
+		
+		JPanel weightPanel = new JPanel();
+		panel.add(weightPanel);
+		
+		JLabel lblPlayerWeight = new JLabel("Player Weight:");
+		weightPanel.add(lblPlayerWeight);
+		
+		textField_4 = new JTextField();
+		textField_4.setColumns(10);
+		weightPanel.add(textField_4);
+		
+		JPanel buttonPanel = new JPanel();
+		panel.add(buttonPanel);
 		
 		JButton btnNewButton = new JButton("Create Player");
-		panel.add(btnNewButton);
+		buttonPanel.add(btnNewButton);
+		
+		JButton btnLoadPlayerData = new JButton("Load Player Data");
+		buttonPanel.add(btnLoadPlayerData);
+		
+		JButton btnSubmitModifications = new JButton("Submit Modified Player Data");
+		buttonPanel.add(btnSubmitModifications);
 		
 		JPanel LiveScoreInputPanel = new JPanel();
 		frmFilthydogs.getContentPane().add(LiveScoreInputPanel, "name_925765079015101");
@@ -247,6 +290,10 @@ public class MainGUIWindow {
 		lblBatchScoreInput.setFont(new Font("Comic Sans MS", Font.PLAIN, 21));
 		BatchScoreInputPanel.add(lblBatchScoreInput, BorderLayout.NORTH);
 		
+		JPanel FilthiestPanel = new JPanel();
+		frmFilthydogs.getContentPane().add(FilthiestPanel, "name_79638213137950");
+		FilthiestPanel.add(new JLabel(new ImageIcon("C:/Users/Lou/Documents/team3/src/team3/dog.jpg")));
+		
 		JMenuBar menuBar = new JMenuBar();
 		frmFilthydogs.setJMenuBar(menuBar);
 		
@@ -254,27 +301,104 @@ public class MainGUIWindow {
 		menuBar.add(mnView);
 		
 		JMenuItem mntmTeamRankings = new JMenuItem("Team Rankings");
+		mntmTeamRankings.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				TeamsPanel.setVisible(true);
+				PlayersPanel.setVisible(false);
+				CreateTeamPanel.setVisible(false);
+				CreatePlayersPanel.setVisible(false);
+				LiveScoreInputPanel.setVisible(false);
+				BatchScoreInputPanel.setVisible(false);
+				FilthiestPanel.setVisible(false);
+			}
+		});
 		mnView.add(mntmTeamRankings);
 		
 		JMenuItem mntmPlayerRankings = new JMenuItem("Player Rankings");
+		mntmPlayerRankings.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TeamsPanel.setVisible(false);
+				PlayersPanel.setVisible(true);
+				CreateTeamPanel.setVisible(false);
+				CreatePlayersPanel.setVisible(false);
+				LiveScoreInputPanel.setVisible(false);
+				BatchScoreInputPanel.setVisible(false);
+				FilthiestPanel.setVisible(false);
+			}
+		});
 		mnView.add(mntmPlayerRankings);
 		
 		JMenuItem mntmFilthyDogs = new JMenuItem("Filthy Dogs");
+		mntmFilthyDogs.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TeamsPanel.setVisible(false);
+				PlayersPanel.setVisible(false);
+				CreateTeamPanel.setVisible(false);
+				CreatePlayersPanel.setVisible(false);
+				LiveScoreInputPanel.setVisible(false);
+				BatchScoreInputPanel.setVisible(false);
+				FilthiestPanel.setVisible(true);
+			}
+		});
 		mnView.add(mntmFilthyDogs);
 		
 		JMenu mnAdministration = new JMenu("Administration");
 		menuBar.add(mnAdministration);
 		
 		JMenuItem mntmNewMenuItem = new JMenuItem("Create Team");
+		mntmNewMenuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TeamsPanel.setVisible(false);
+				PlayersPanel.setVisible(false);
+				CreateTeamPanel.setVisible(true);
+				CreatePlayersPanel.setVisible(false);
+				LiveScoreInputPanel.setVisible(false);
+				BatchScoreInputPanel.setVisible(false);
+				FilthiestPanel.setVisible(false);
+			}
+		});
 		mnAdministration.add(mntmNewMenuItem);
 		
 		JMenuItem mntmCreatePlayer = new JMenuItem("Create Player");
+		mntmCreatePlayer.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TeamsPanel.setVisible(false);
+				PlayersPanel.setVisible(false);
+				CreateTeamPanel.setVisible(false);
+				CreatePlayersPanel.setVisible(true);
+				LiveScoreInputPanel.setVisible(false);
+				BatchScoreInputPanel.setVisible(false);
+				FilthiestPanel.setVisible(false);
+			}
+		});
 		mnAdministration.add(mntmCreatePlayer);
 		
 		JMenuItem mntmNewMenuItem_1 = new JMenuItem("Live Score Input");
+		mntmNewMenuItem_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TeamsPanel.setVisible(false);
+				PlayersPanel.setVisible(false);
+				CreateTeamPanel.setVisible(false);
+				CreatePlayersPanel.setVisible(false);
+				LiveScoreInputPanel.setVisible(true);
+				BatchScoreInputPanel.setVisible(false);
+				FilthiestPanel.setVisible(false);
+			}
+		});
 		mnAdministration.add(mntmNewMenuItem_1);
 		
 		JMenuItem mntmBatchScoreInput = new JMenuItem("Batch Score Input");
+		mntmBatchScoreInput.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				TeamsPanel.setVisible(false);
+				PlayersPanel.setVisible(false);
+				CreateTeamPanel.setVisible(false);
+				CreatePlayersPanel.setVisible(false);
+				LiveScoreInputPanel.setVisible(false);
+				BatchScoreInputPanel.setVisible(true);
+				FilthiestPanel.setVisible(false);
+			}
+		});
 		mnAdministration.add(mntmBatchScoreInput);
 		
 		JLabel lblFilthyDogsRepresent = new JLabel("FILTHY DOGS REPRESENT WOOF WOOF");
