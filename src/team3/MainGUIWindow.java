@@ -31,21 +31,31 @@ import javax.swing.border.BevelBorder;
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
 import java.awt.Component;
+import java.awt.Dimension;
+
+import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
+import javax.swing.JFormattedTextField;
+import java.awt.Insets;
+import javax.swing.JScrollBar;
 
 public class MainGUIWindow {
 
 	private JFrame frmFilthydogs;
-	private JTable table;
+	private JTable playersTable;
 	private JTable table_1;
 	private JTable table_2;
 	private JTable table_3;
-	private JTextField txtEnterATeam;
 	private JTextField textField;
 	private JTextField textField_1;
 	private JTextField textField_2;
 	private JTable table_4;
 	private JTextField textField_3;
 	private JTextField textField_4;
+	private JTable table_5;
+	private JTextField textField_5;
+	private JTextField textField_6;
+	private JTable table_6;
 
 	/**
 	 * Launch the application.
@@ -76,7 +86,7 @@ public class MainGUIWindow {
 	private void initialize() {
 		frmFilthydogs = new JFrame();
 		frmFilthydogs.setTitle("FilthyDogs\u00AE Soccer ScoreKeeper");
-		frmFilthydogs.setBounds(100, 100, 596, 473);
+		frmFilthydogs.setBounds(100, 100, 596, 650);
 		frmFilthydogs.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmFilthydogs.getContentPane().setLayout(new CardLayout(0, 0));
 		
@@ -88,10 +98,7 @@ public class MainGUIWindow {
 		PlayersPanel.add(lblThisIsThe, BorderLayout.NORTH);
 		lblThisIsThe.setHorizontalAlignment(SwingConstants.CENTER);
 		lblThisIsThe.setFont(new Font("Comic Sans MS", Font.PLAIN, 21));
-		
-		table = new JTable();
-		PlayersPanel.add(table);
-		
+				
 		JPanel PlayersOptionPanel = new JPanel();
 		PlayersPanel.add(PlayersOptionPanel, BorderLayout.EAST);
 		PlayersOptionPanel.setLayout(new BoxLayout(PlayersOptionPanel, BoxLayout.Y_AXIS));
@@ -107,6 +114,11 @@ public class MainGUIWindow {
 		
 		JComboBox comboBox_1 = new JComboBox();
 		PlayersOptionPanel.add(comboBox_1);
+		
+		JPanel panel_3 = new JPanel();
+		PlayersPanel.add(panel_3, BorderLayout.CENTER);
+		playersTable = new JTable(20, 6);
+		PlayersPanel.add(playersTable);
 		
 		JPanel TeamsPanel = new JPanel();
 		frmFilthydogs.getContentPane().add(TeamsPanel, "name_921182758166659");
@@ -127,7 +139,7 @@ public class MainGUIWindow {
 		JComboBox comboBox_2 = new JComboBox();
 		TeamsOptionsPanel.add(comboBox_2);
 		
-		table_1 = new JTable();
+		table_1 = new JTable(20,6);
 		TeamsPanel.add(table_1, BorderLayout.CENTER);
 		
 		JPanel CreateTeamPanel = new JPanel();
@@ -146,7 +158,7 @@ public class MainGUIWindow {
 		JLabel lblNewLabel_1 = new JLabel("Current Players");
 		CurrentPlayersPanel.add(lblNewLabel_1);
 		
-		table_2 = new JTable();
+		table_2 = new JTable(15,1);
 		table_2.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		table_2.setCellSelectionEnabled(true);
 		CurrentPlayersPanel.add(table_2);
@@ -158,7 +170,7 @@ public class MainGUIWindow {
 		JLabel lblFreeAgents = new JLabel("Free Agents");
 		FreeAgentPanel.add(lblFreeAgents);
 		
-		table_3 = new JTable();
+		table_3 = new JTable(15,1);
 		table_3.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		table_3.setCellSelectionEnabled(true);
 		FreeAgentPanel.add(table_3);
@@ -176,11 +188,9 @@ public class MainGUIWindow {
 		JLabel lblCreateANew = new JLabel("Create a new team:");
 		ControlPanel.add(lblCreateANew);
 		
-		txtEnterATeam = new JTextField();
-		txtEnterATeam.setHorizontalAlignment(SwingConstants.LEFT);
-		txtEnterATeam.setText("Enter a team name:");
-		ControlPanel.add(txtEnterATeam);
-		txtEnterATeam.setColumns(1);
+		JTextField formattedTextField_4 = new JFormattedTextField();
+		formattedTextField_4.setMaximumSize(new Dimension(600, 40));
+		ControlPanel.add(formattedTextField_4);
 		
 		JButton btnCreateTeam = new JButton("Create Team");
 		ControlPanel.add(btnCreateTeam);
@@ -204,7 +214,7 @@ public class MainGUIWindow {
 		JPanel existingPlayersPanel = new JPanel();
 		panel.add(existingPlayersPanel);
 		
-		table_4 = new JTable();
+		table_4 = new JTable(20,4);
 		existingPlayersPanel.add(table_4);
 		
 		JLabel lblEnterPlayerInformation = new JLabel("Enter Player Information:");
@@ -274,21 +284,212 @@ public class MainGUIWindow {
 		
 		JPanel LiveScoreInputPanel = new JPanel();
 		frmFilthydogs.getContentPane().add(LiveScoreInputPanel, "name_925765079015101");
-		LiveScoreInputPanel.setLayout(new BorderLayout(0, 0));
+		LiveScoreInputPanel.setLayout(new BoxLayout(LiveScoreInputPanel, BoxLayout.Y_AXIS));
 		
 		JLabel lblLiveScoreInput = new JLabel("Live Score Input");
 		lblLiveScoreInput.setHorizontalAlignment(SwingConstants.CENTER);
 		lblLiveScoreInput.setFont(new Font("Comic Sans MS", Font.PLAIN, 21));
-		LiveScoreInputPanel.add(lblLiveScoreInput, BorderLayout.NORTH);
+		LiveScoreInputPanel.add(lblLiveScoreInput);
+		
+		JPanel liveTeamSelectionPanel = new JPanel();
+		LiveScoreInputPanel.add(liveTeamSelectionPanel);
+		liveTeamSelectionPanel.setLayout(new BoxLayout(liveTeamSelectionPanel, BoxLayout.Y_AXIS));
+		
+		JPanel panel_1 = new JPanel();
+		liveTeamSelectionPanel.add(panel_1);
+		
+		JLabel lblTeam_3 = new JLabel("Team 1:");
+		panel_1.add(lblTeam_3);
+		
+		JComboBox comboBox_7 = new JComboBox();
+		panel_1.add(comboBox_7);
+		
+		JLabel lblTeam_4 = new JLabel("Team 2:");
+		panel_1.add(lblTeam_4);
+		
+		JComboBox comboBox_8 = new JComboBox();
+		panel_1.add(comboBox_8);
+		
+		JPanel panel_2 = new JPanel();
+		liveTeamSelectionPanel.add(panel_2);
+		
+		JLabel lblDate = new JLabel("Today's Date:");
+		panel_2.add(lblDate);
+		
+		JComboBox comboBox_9 = new JComboBox();
+		panel_2.add(comboBox_9);
+		
+		JLabel lblNewLabel_2 = new JLabel("Month");
+		panel_2.add(lblNewLabel_2);
+		
+		JComboBox comboBox_10 = new JComboBox();
+		panel_2.add(comboBox_10);
+		
+		JButton btnCreateMatch = new JButton("Create Match");
+		panel_2.add(btnCreateMatch);
+		
+		JButton btnEndMatch = new JButton("End Match");
+		panel_2.add(btnEndMatch);
+		
+		JPanel liveMatchInfoPanel = new JPanel();
+		LiveScoreInputPanel.add(liveMatchInfoPanel);
+		
+		table_6 = new JTable(20,4);
+		liveMatchInfoPanel.add(table_6);
+		
+		JPanel viewPanel = new JPanel();
+		LiveScoreInputPanel.add(viewPanel);
+		
+		JLabel lblTeam_5 = new JLabel("Team:");
+		viewPanel.add(lblTeam_5);
+		
+		JRadioButton radioButton_2 = new JRadioButton("1");
+		viewPanel.add(radioButton_2);
+		
+		JRadioButton radioButton_3 = new JRadioButton("2");
+		viewPanel.add(radioButton_3);
+		
+		JLabel lblPlayer_1 = new JLabel("Player:");
+		viewPanel.add(lblPlayer_1);
+		
+		JComboBox comboBox_11 = new JComboBox();
+		viewPanel.add(comboBox_11);
+		
+		JLabel lblShot_1 = new JLabel("Shot Success:");
+		viewPanel.add(lblShot_1);
+		
+		JComboBox comboBox_12 = new JComboBox();
+		viewPanel.add(comboBox_12);
+		
+		JPanel inputLiveGoalPanel = new JPanel();
+		LiveScoreInputPanel.add(inputLiveGoalPanel);
+		
+		JLabel lblCounter = new JLabel("COUNTER");
+		inputLiveGoalPanel.add(lblCounter);
+		
+		JButton btnCopyTime = new JButton("Copy Time");
+		inputLiveGoalPanel.add(btnCopyTime);
+		
+		JLabel lblTime = new JLabel("Time:");
+		inputLiveGoalPanel.add(lblTime);
+		
+		JFormattedTextField formattedTextField_2 = new JFormattedTextField();
+		inputLiveGoalPanel.add(formattedTextField_2);
+		
+		JLabel lblNewLabel_3 = new JLabel(":");
+		inputLiveGoalPanel.add(lblNewLabel_3);
+		
+		JFormattedTextField formattedTextField_3 = new JFormattedTextField();
+		inputLiveGoalPanel.add(formattedTextField_3);
+		
+		JButton btnSubmitShot = new JButton("Submit Shot");
+		inputLiveGoalPanel.add(btnSubmitShot);
 		
 		JPanel BatchScoreInputPanel = new JPanel();
 		frmFilthydogs.getContentPane().add(BatchScoreInputPanel, "name_925775241412546");
-		BatchScoreInputPanel.setLayout(new BorderLayout(0, 0));
+		BatchScoreInputPanel.setLayout(new BoxLayout(BatchScoreInputPanel, BoxLayout.Y_AXIS));
 		
 		JLabel lblBatchScoreInput = new JLabel("Batch Score Input");
 		lblBatchScoreInput.setHorizontalAlignment(SwingConstants.CENTER);
 		lblBatchScoreInput.setFont(new Font("Comic Sans MS", Font.PLAIN, 21));
-		BatchScoreInputPanel.add(lblBatchScoreInput, BorderLayout.NORTH);
+		BatchScoreInputPanel.add(lblBatchScoreInput);
+		
+		JPanel teamSelectionPanel = new JPanel();
+		BatchScoreInputPanel.add(teamSelectionPanel);
+		teamSelectionPanel.setLayout(new BoxLayout(teamSelectionPanel, BoxLayout.X_AXIS));
+		
+		JLabel lblTeam_1 = new JLabel("Team 2: ");
+		teamSelectionPanel.add(lblTeam_1);
+		
+		JComboBox comboBox_3 = new JComboBox();
+		teamSelectionPanel.add(comboBox_3);
+		
+		JLabel lblTeam = new JLabel("Team 1:");
+		teamSelectionPanel.add(lblTeam);
+		
+		JComboBox comboBox_4 = new JComboBox();
+		teamSelectionPanel.add(comboBox_4);
+		
+		JPanel matchInfoPanel = new JPanel();
+		BatchScoreInputPanel.add(matchInfoPanel);
+		
+		JLabel lblDay = new JLabel("Match Day: ");
+		matchInfoPanel.add(lblDay);
+		
+		textField_5 = new JTextField();
+		matchInfoPanel.add(textField_5);
+		textField_5.setColumns(10);
+		
+		JLabel lblMonth = new JLabel("Month: ");
+		matchInfoPanel.add(lblMonth);
+		
+		textField_6 = new JTextField();
+		matchInfoPanel.add(textField_6);
+		textField_6.setColumns(10);
+		
+		JPanel editPanel = new JPanel();
+		BatchScoreInputPanel.add(editPanel);
+		
+		table_5 = new JTable(20,4);
+		editPanel.add(table_5);
+		
+		JPanel inputGoalPanel = new JPanel();
+		BatchScoreInputPanel.add(inputGoalPanel);
+		inputGoalPanel.setLayout(new BoxLayout(inputGoalPanel, BoxLayout.Y_AXIS));
+		
+		JPanel inputGoalPanelRow1 = new JPanel();
+		inputGoalPanel.add(inputGoalPanelRow1);
+		
+		JLabel lblTeam_2 = new JLabel("Team: ");
+		inputGoalPanelRow1.add(lblTeam_2);
+		
+		JRadioButton radioButton = new JRadioButton("1");
+		inputGoalPanelRow1.add(radioButton);
+		
+		JRadioButton radioButton_1 = new JRadioButton("2");
+		inputGoalPanelRow1.add(radioButton_1);
+		
+		JLabel lblPlayer = new JLabel("Player:");
+		inputGoalPanelRow1.add(lblPlayer);
+		
+		JComboBox comboBox_5 = new JComboBox();
+		inputGoalPanelRow1.add(comboBox_5);
+		
+		JPanel inputGoalPanelRow2 = new JPanel();
+		inputGoalPanel.add(inputGoalPanelRow2);
+		
+		JLabel lblShot = new JLabel("Shot:");
+		inputGoalPanelRow2.add(lblShot);
+		
+		JComboBox comboBox_6 = new JComboBox();
+		inputGoalPanelRow2.add(comboBox_6);
+		
+		JLabel lblGameTime = new JLabel("Game time:");
+		inputGoalPanelRow2.add(lblGameTime);
+		
+		JFormattedTextField formattedTextField = new JFormattedTextField();
+		inputGoalPanelRow2.add(formattedTextField);
+		
+		JLabel label = new JLabel(":");
+		inputGoalPanelRow2.add(label);
+		
+		JFormattedTextField formattedTextField_1 = new JFormattedTextField();
+		inputGoalPanelRow2.add(formattedTextField_1);
+		
+		JButton btnEnterShot = new JButton("Enter Shot");
+		inputGoalPanelRow2.add(btnEnterShot);
+		
+		JPanel submitPanel = new JPanel();
+		BatchScoreInputPanel.add(submitPanel);
+		
+		JButton btnDeleteBottomRow = new JButton("Delete Bottom Row");
+		submitPanel.add(btnDeleteBottomRow);
+		
+		JButton btnDeleteAll = new JButton("Delete All");
+		submitPanel.add(btnDeleteAll);
+		
+		JButton btnSubmitGame = new JButton("Submit Game");
+		submitPanel.add(btnSubmitGame);
 		
 		JPanel FilthiestPanel = new JPanel();
 		frmFilthydogs.getContentPane().add(FilthiestPanel, "name_79638213137950");
@@ -328,7 +529,7 @@ public class MainGUIWindow {
 		});
 		mnView.add(mntmPlayerRankings);
 		
-		JMenuItem mntmFilthyDogs = new JMenuItem("Filthy Dogs");
+		JMenuItem mntmFilthyDogs = new JMenuItem("A Filthy Secret");
 		mntmFilthyDogs.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				TeamsPanel.setVisible(false);
