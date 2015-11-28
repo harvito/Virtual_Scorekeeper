@@ -195,6 +195,12 @@ public class MainGUIWindow {
 		JButton btnCreateTeam = new JButton("Create Team");
 		ControlPanel.add(btnCreateTeam);
 		
+		JLabel lblChooseTeam = new JLabel("Choose Team:");
+		ControlPanel.add(lblChooseTeam);
+		
+		JComboBox comboBox_13 = new JComboBox();
+		ControlPanel.add(comboBox_13);
+		
 		JPanel CreatePlayersPanel = new JPanel();
 		frmFilthydogs.getContentPane().add(CreatePlayersPanel, "name_925704200991788");
 		CreatePlayersPanel.setLayout(new BorderLayout(0, 0));
@@ -337,29 +343,44 @@ public class MainGUIWindow {
 		table_6 = new JTable(20,4);
 		liveMatchInfoPanel.add(table_6);
 		
-		JPanel viewPanel = new JPanel();
-		LiveScoreInputPanel.add(viewPanel);
+		JPanel panel_5 = new JPanel();
+		LiveScoreInputPanel.add(panel_5);
 		
-		JLabel lblTeam_5 = new JLabel("Team:");
-		viewPanel.add(lblTeam_5);
+		JLabel label_1 = new JLabel("Team:");
+		panel_5.add(label_1);
 		
 		JRadioButton radioButton_2 = new JRadioButton("1");
-		viewPanel.add(radioButton_2);
+		panel_5.add(radioButton_2);
 		
 		JRadioButton radioButton_3 = new JRadioButton("2");
-		viewPanel.add(radioButton_3);
+		panel_5.add(radioButton_3);
 		
 		JLabel lblPlayer_1 = new JLabel("Player:");
-		viewPanel.add(lblPlayer_1);
+		panel_5.add(lblPlayer_1);
 		
 		JComboBox comboBox_11 = new JComboBox();
-		viewPanel.add(comboBox_11);
+		panel_5.add(comboBox_11);
+		
+		JPanel viewPanel = new JPanel();
+		LiveScoreInputPanel.add(viewPanel);
 		
 		JLabel lblShot_1 = new JLabel("Shot Success:");
 		viewPanel.add(lblShot_1);
 		
 		JComboBox comboBox_12 = new JComboBox();
 		viewPanel.add(comboBox_12);
+		
+		JPanel panel_6 = new JPanel();
+		LiveScoreInputPanel.add(panel_6);
+		
+		JLabel lblInfractionType_1 = new JLabel("Infraction Type:");
+		panel_6.add(lblInfractionType_1);
+		
+		JComboBox comboBox_16 = new JComboBox();
+		panel_6.add(comboBox_16);
+		
+		JButton btnSubmitInfraction_1 = new JButton("Submit Infraction");
+		panel_6.add(btnSubmitInfraction_1);
 		
 		JPanel inputLiveGoalPanel = new JPanel();
 		LiveScoreInputPanel.add(inputLiveGoalPanel);
@@ -454,6 +475,18 @@ public class MainGUIWindow {
 		
 		JComboBox comboBox_5 = new JComboBox();
 		inputGoalPanelRow1.add(comboBox_5);
+		
+		JPanel panel_4 = new JPanel();
+		inputGoalPanel.add(panel_4);
+		
+		JLabel lblInfractionType = new JLabel("Infraction Type:");
+		panel_4.add(lblInfractionType);
+		
+		JComboBox comboBox_14 = new JComboBox();
+		panel_4.add(comboBox_14);
+		
+		JButton btnSubmitInfraction = new JButton("Submit Infraction");
+		panel_4.add(btnSubmitInfraction);
 		
 		JPanel inputGoalPanelRow2 = new JPanel();
 		inputGoalPanel.add(inputGoalPanelRow2);
