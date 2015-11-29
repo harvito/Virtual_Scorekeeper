@@ -21,6 +21,7 @@ public class sqlInterface {
 			String connectionUser = "filthyuser";
 			String connectionPassword = "filthypass";
 			conn = DriverManager.getConnection(connectionUrl, connectionUser, connectionPassword);
+			stmt = conn.createStatement();
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -37,7 +38,7 @@ public class sqlInterface {
 		//these variables are to deal with multiple 
 		String output[][] = null;
 		int playerCounter = 0;
-			stmt = conn.createStatement();
+			
 
 			if (team == "All") {
 				rs = stmt.executeQuery("SELECT * FROM players");
