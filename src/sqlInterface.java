@@ -22,45 +22,6 @@ public class sqlInterface {
 		}
 	}
 	
-	public static String[][] getPlayers(int column, String team) {
-		//these variables are to deal with multiple 
-		String output[][] = null;
-		int playerCounter = 0;
-			
-
-			if (team == "All") {
-				rs = stmt.executeQuery("SELECT * FROM players");
-				while (rs.next()) {
-					output[playerCounter][0] = rs.getString("name");
-					output[playerCounter][1] = rs.getString("jerseyNum");
-					output[playerCounter][2] = rs.getString("height");
-					output[playerCounter][3] = rs.getString("weight");
-					playerCounter++;
-				}
-			} else  {
-				String[] playerList = getPlayersOnTeam(team);
-				rs = stmt.executeQuery("SELECT * FROM players");
-				while (rs.next()) {
-					
-					playerCounter++;
-				}
-			}
-
-			while (rs.next()) {
-				
-				String id = rs.getString("id");
-				String firstName = rs.getString("first_name");
-				String lastName = rs.getString("last_name");
-				System.out.println("ID: " + id + ", First Name: " + firstName
-						+ ", Last Name: " + lastName);
-			}
-			if (conn != null) {
-				conn.close();
-			}
-
-		return null;
-	}
-	
 	public static boolean addPlayer(String playerName, int jerseyNum, float height, float weight) {
 		String url = "jdbc:mysql://159.203.11.244:3306/filthybase";
 		String user = "filthyuser";
@@ -82,7 +43,7 @@ public class sqlInterface {
 		//remove the player from the database
 	}
 	
-	public static void removePlayer (String playerName) {
+	public static boolean removePlayer (String playerName) {
 		String url = "jdbc:mysql://159.203.11.244:3306/filthybase";
 		String user = "filthyuser";
 		String password = "filthypass";
@@ -90,21 +51,117 @@ public class sqlInterface {
 				Statement stmt = connection.createStatement()) {
 			try (ResultSet rs = stmt.executeQuery("DELETE FROM players WHERE name='" + playerName + "';")) {
 				connection.close();
+				return true;
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		return false;
 	}
-	
-	public static String[] getFullTeamInfo(String teamName) {
+
+	public static boolean addTeam(String teamName) {
 		String url = "jdbc:mysql://159.203.11.244:3306/filthybase";
 		String user = "filthyuser";
 		String password = "filthypass";
 		try (Connection connection = DriverManager.getConnection(url, user, password);
 				Statement stmt = connection.createStatement()) {
+			try (ResultSet rs = stmt.executeQuery("INSERT INTO teams VALUES (" + teamName + ") ;")) {
+				connection.close();
+				return true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+		//remove the player from the database
+	}
+	
+	public static boolean removeTeam (String teamName) {
+		String url = "jdbc:mysql://159.203.11.244:3306/filthybase";
+		String user = "filthyuser";
+		String password = "filthypass";
+		try (Connection connection = DriverManager.getConnection(url, user, password);
+				Statement stmt = connection.createStatement()) {
+			try (ResultSet rs = stmt.executeQuery("DELETE FROM teams WHERE name='" + teamName + "';")) {
+				connection.close();
+				return true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}	
+	
+	public static String[] getPlayerInfo (String playerName){
+		String url = "jdbc:mysql://159.203.11.244:3306/filthybase";
+		String user = "filthyuser";
+		String password = "filthypass";
+		String[] playerInfo = new String[4];
+		try (Connection connection = DriverManager.getConnection(url, user, password);
+				Statement stmt = connection.createStatement()) {
+			try (ResultSet rs = stmt.executeQuery("SELECT * FROM players WHERE name='" + playerName + "';")) {
+				connection.close();
+				if (rs != null) {
+					playerInfo[0] = rs.getString(0);
+					playerInfo[1] = rs.getString(1);
+					playerInfo[2] = rs.getString(2);
+					playerInfo[3] = rs.getString(3);
+					return playerInfo;
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public static String[][] getTeamsFullPlayerInfo(String teamName) {
+		String url = "jdbc:mysql://159.203.11.244:3306/filthybase";
+		String user = "filthyuser";
+		String password = "filthypass";
+		String[][] playersInfo = new String[16][4];
+		int i = 0;
+		try (Connection connection = DriverManager.getConnection(url, user, password);
+				Statement stmt = connection.createStatement()) {
 			try (ResultSet rs = stmt.executeQuery("SELECT * FROM players WHERE currentTeam='" + teamName + "';")) {
 				connection.close();
-				return (String[])rs.getArray("is_nullable").getArray();
+				if (rs != null) {
+					do {
+						playersInfo[i][0] = rs.getString(0);
+						playersInfo[i][1] = rs.getString(1);
+						playersInfo[i][2] = rs.getString(2);
+						playersInfo[i][3] = rs.getString(3);
+						i++;
+					} while (rs.next());
+					return playersInfo;
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}	
+	
+	public static String[][] getAllPlayersFullInfo() {
+		String url = "jdbc:mysql://159.203.11.244:3306/filthybase";
+		String user = "filthyuser";
+		String password = "filthypass";
+		String[][] teamInfo = new String[16][4];
+		int i = 0;
+		try (Connection connection = DriverManager.getConnection(url, user, password);
+				Statement stmt = connection.createStatement()) {
+			try (ResultSet rs = stmt.executeQuery("SELECT * FROM players;")) {
+				connection.close();
+				if (rs != null) {
+					do {
+						teamInfo[i][0] = rs.getString(0);
+						teamInfo[i][1] = rs.getString(1);
+						teamInfo[i][2] = rs.getString(2);
+						teamInfo[i][3] = rs.getString(3);
+						i++;
+					} while (rs.next());
+					return teamInfo;
+				}
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -116,11 +173,20 @@ public class sqlInterface {
 		String url = "jdbc:mysql://159.203.11.244:3306/filthybase";
 		String user = "filthyuser";
 		String password = "filthypass";
+		String[] teamNames = new String[16];
+		int i = 0;
 		try (Connection connection = DriverManager.getConnection(url, user, password);
 				Statement stmt = connection.createStatement()) {
 			try (ResultSet rs = stmt.executeQuery("SELECT name FROM teams;")) {
 				connection.close();
-				return (String[])rs.getArray("is_nullable").getArray();
+				if (rs != null) {
+					teamNames[i] = rs.getString(0);
+					while (rs.next()) {
+						i++;
+						teamNames[i] = rs.getString(0);
+					}
+					return teamNames;
+				}
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -132,11 +198,20 @@ public class sqlInterface {
 		String url = "jdbc:mysql://159.203.11.244:3306/filthybase";
 		String user = "filthyuser";
 		String password = "filthypass";
+		String[] playersOnTeam = new String[20];
+		int i = 0;
 		try (Connection connection = DriverManager.getConnection(url, user, password);
 				Statement stmt = connection.createStatement()) {
 			try (ResultSet rs = stmt.executeQuery("SELECT name FROM players WHERE currentTeam='" + teamName + "';")) {
 				connection.close();
-				return (String[])rs.getArray("is_nullable").getArray();
+				if (rs != null) {
+					playersOnTeam[i] = rs.getString(0);
+					while (rs.next()) {
+						i++;
+						playersOnTeam[i] = rs.getString(0);
+					}
+					return playersOnTeam;
+				}
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -156,8 +231,13 @@ public class sqlInterface {
 													+ teamName +
 													"' and success='2';")) {
 				connection.close();
-				String[] god = (String[])rs.getArray("is_nullable").getArray();
-				amountOfGoals = god.length;
+				if (rs != null) {
+					amountOfGoals = 1;
+					while (rs.next()) {
+						amountOfGoals++;
+					}
+					return amountOfGoals;
+				}
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
