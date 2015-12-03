@@ -115,7 +115,7 @@ public class sqlInterface {
 		String url = "jdbc:mysql://159.203.11.244:3306/filthybase";
 		String user = "filthyuser";
 		String password = "filthypass";
-		String[] playerInfo = new String[4];
+		String[] playerInfo = new String[7];
 		try (Connection connection = DriverManager.getConnection(url, user, password);
 				Statement stmt = connection.createStatement()) {
 			try (ResultSet rs = stmt.executeQuery("SELECT * FROM players WHERE name='" + playerName + "';")) {
@@ -125,11 +125,15 @@ public class sqlInterface {
 					playerInfo[1] = rs.getString(1);
 					playerInfo[2] = rs.getString(2);
 					playerInfo[3] = rs.getString(3);
+					playerInfo[4] = rs.getString(4);
+					playerInfo[5] = rs.getString(5);
+					playerInfo[6] = rs.getString(6);
 					return playerInfo;
 				}
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+			System.out.println("SQLException: " + e.getMessage());
 		}
 		return null;
 	}
