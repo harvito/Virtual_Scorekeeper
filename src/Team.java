@@ -24,8 +24,7 @@ public class Team
   // CONSTRUCTOR
   //------------------------
 
-  public Team(String aTeamName, int aPoints)
-  {
+  public Team(String aTeamName, int aPoints) {
     teamName = aTeamName;
     points = aPoints;
     players = new ArrayList<Player>();
