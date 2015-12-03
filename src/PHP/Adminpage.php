@@ -4,20 +4,24 @@
   <title>Virtual Scorekeeper</title>
 <style>
 body {
-   background-image: url("background.jpg");
+    background-image: url("background.jpg");
     background-repeat: no-repeat;
     background-position: centre centre;
-    max-width: 100%;
-    max-height: 100%;
     background-size: cover;
 }
+
+#header {
+color:white;
+text-align:center;
+padding-top:0px;
+
+}
+
 a {
 color: white;
     text-align:center;
     padding-left: 10%;
     padding-right: 10%;
-    padding-top: 10%;
-    padding-bottom: 10%;
     font-size: 200%;
     text-decoration: none;
 }
@@ -32,14 +36,13 @@ a:visited {
 
 a:hover {
     text-decoration: none;
-    font-size: 225%;
+    font-size: 250%;
 }
 
 a:active {
     text-decoration: none;
-font-size: 225%;
+    font-size: 250%;
 }
-    
 #adminoptions {
 color: white;
     text-align:center;
@@ -68,32 +71,10 @@ color: white;
     text-decoration: none;
 font-size: 160%;
 }
-#header {
-color:white;
-text-align:center;
-padding-top:0px;
-font-size: 250%
-}
-#teamrankings {
-line-height:30px;
-height:20px;
-width:100%;
-float:left;
-padding:5px;
-position: fixed;
-top: 30%;
-left: 10%;
-}
-#playerrankings {
-line-height:30px;
-height:20px;
-width:500px;
-float:right;
-padding:5px;
-position: fixed;
-top: 30%;
-right: 10%;
-}
+    
+    
+    
+    
     #adminactions {
         line-height:30px;
         height:110px;
@@ -116,30 +97,30 @@ right: 10%;
         padding-bottom: 20px;
        
     }
-    
-
-
 </style>
+   
  </head>
 
 <body>
 
+
     
-<div id="header">
-<h1>Virtual Scorekeeper</h1>
-</div>
-
-
-<div id="teamrankings">
-<a href="http://localhost:8888/Page2a.php"> <strong> View Team Rankings </strong> </a>
-
-</div>
-
-<div id="playerrankings">
-
-<a href="http://localhost:8888/Page2a.php"> <strong> View Player Rankings </strong> </a>
-</div>
- 
-
+    
+    
+<div id="adminactions";>
+    <div id="title"> <strong> Admin Actions </strong>  </div>
+    <a id="adminoptions" href="http://localhost:8888/Page2a.php"> <strong> Create Team </strong> </a>
+    <a id="adminoptions" href="http://localhost:8888/Page2a.php"> <strong> Create Player </strong> </a>
+    <a id="adminoptions" href="http://localhost:8888/live.php"> <strong> Live Score Input </strong> </a>
+    <a id="adminoptions" href="http://localhost:8888/batch.php"> <strong> Batch Score Input </strong> </a>
+    
+    </div>   
+    
+    
+    
+    
+    
+    
+    
 </body>
 </html>
