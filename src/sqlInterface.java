@@ -119,17 +119,17 @@ public class sqlInterface {
 		try (Connection connection = DriverManager.getConnection(url, user, password);
 				Statement stmt = connection.createStatement()) {
 			try (ResultSet rs = stmt.executeQuery("SELECT * FROM players WHERE name='" + playerName + "';")) {
-				connection.close();
-				if (rs != null) {
-					playerInfo[0] = rs.getString(0);
-					playerInfo[1] = rs.getString(1);
-					playerInfo[2] = rs.getString(2);
-					playerInfo[3] = rs.getString(3);
-					playerInfo[4] = rs.getString(4);
-					playerInfo[5] = rs.getString(5);
-					playerInfo[6] = rs.getString(6);
+				if (rs != null && rs.next()) {
+					playerInfo[0] = rs.getString(1);
+					playerInfo[1] = rs.getString(2); 
+					playerInfo[2] = rs.getString(3);
+					playerInfo[3] = rs.getString(4);
+					playerInfo[4] = rs.getString(5);
+					playerInfo[5] = rs.getString(6);
+					playerInfo[6] = rs.getString(7);
 					return playerInfo;
 				}
+				connection.close();
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
