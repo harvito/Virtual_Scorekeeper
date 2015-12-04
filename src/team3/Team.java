@@ -1,3 +1,4 @@
+package team3;
 /*PLEASE DO NOT EDIT THIS CODE*/
 /*This code was generated using the UMPLE 1.22.0.5146 modeling language!*/
 
@@ -24,7 +25,8 @@ public class Team
   // CONSTRUCTOR
   //------------------------
 
-  public Team(String aTeamName, int aPoints) {
+  public Team(String aTeamName, int aPoints)
+  {
     teamName = aTeamName;
     points = aPoints;
     players = new ArrayList<Player>();
