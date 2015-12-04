@@ -13,7 +13,7 @@ public class sqlInterface {
 		String user = "filthyuser";
 		String password = "filthypass";
 		try (Connection connection = DriverManager.getConnection(url, user, password);
-			Statement stmt = connection.createStatement()) {
+		Statement stmt = connection.createStatement()) {
 			int rs = stmt.executeUpdate("INSERT INTO players VALUES ('"
 					+ playerName + "','" 
 					+ jerseyNum + "','"
@@ -58,12 +58,15 @@ public class sqlInterface {
 		String user = "filthyuser";
 		String password = "filthypass";
 		try (Connection connection = DriverManager.getConnection(url, user, password);
-				Statement stmt = connection.createStatement()) {
-			try (ResultSet rs = stmt.executeQuery("INSERT INTO teams VALUES (" + teamName + ") ;")) {
-				connection.close();
+		Statement stmt = connection.createStatement()) {
+			int rs = stmt.executeUpdate("INSERT INTO teams VALUES ('" + teamName + "');");
+			connection.close();
+			if (rs == 1) {
 				return true;
 			}
+			
 		} catch (SQLException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return false;
@@ -75,16 +78,20 @@ public class sqlInterface {
 		String user = "filthyuser";
 		String password = "filthypass";
 		try (Connection connection = DriverManager.getConnection(url, user, password);
-				Statement stmt = connection.createStatement()) {
-			try (ResultSet rs = stmt.executeQuery("DELETE FROM teams WHERE name='" + teamName + "';")) {
-				connection.close();
+		Statement stmt = connection.createStatement()) {
+			int rs = stmt.executeUpdate("DELETE FROM teams WHERE name='" + teamName + "');");
+			connection.close();
+			if (rs == 1) {
 				return true;
 			}
+			
 		} catch (SQLException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return false;
-	}	
+		//remove the player from the database
+	}
 	
 	public static boolean changePlayersTeam (String playerName, String teamFrom, String teamTo) {
 		String url = "jdbc:mysql://159.203.11.244:3306/filthybase";
