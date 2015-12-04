@@ -7,36 +7,27 @@ import java.sql.Statement;
 //import com.mysql.jdbc.Driver;
 
 public class sqlInterface {
-	
-	//constructor holding all the connection shit
-	public sqlInterface() {
-		try {
-			Class.forName("com.mysql.jdbc.Driver").newInstance();
-			String connectionUrl = "jdbc:mysql://159.203.11.244:3306/filthybase";
-			String connectionUser = "filthyuser";
-			String connectionPassword = "filthypass";
-			DriverManager.getConnection(connectionUrl, connectionUser, connectionPassword);			
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-	
-	public static boolean addPlayer(String playerName, int jerseyNum, float height, float weight, boolean goalKeeper) {
+		
+	public static boolean addPlayer(String playerName, String jerseyNum, String height, String weight, String position, String currentTeam) {
 		String url = "jdbc:mysql://159.203.11.244:3306/filthybase";
 		String user = "filthyuser";
 		String password = "filthypass";
 		try (Connection connection = DriverManager.getConnection(url, user, password);
-				Statement stmt = connection.createStatement()) {
-			try (ResultSet rs = stmt.executeQuery("INSERT INTO players VALUES ("
-													+ playerName + "," 
-													+ String.valueOf(jerseyNum) + ","
-													+ String.valueOf(height) + ","
-													+ String.valueOf(weight) + ","
-													+ String.valueOf(goalKeeper) + ") ;")) {
-				connection.close();
+			Statement stmt = connection.createStatement()) {
+			int rs = stmt.executeUpdate("INSERT INTO players VALUES ('"
+					+ playerName + "','" 
+					+ jerseyNum + "','"
+					+ height + "','"
+					+ weight + "','"
+					+ position + "','"
+					+ currentTeam + "');");
+			connection.close();
+			if (rs == 1) {
 				return true;
+			} else {
+				return false;
 			}
+				
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -49,12 +40,14 @@ public class sqlInterface {
 		String user = "filthyuser";
 		String password = "filthypass";
 		try (Connection connection = DriverManager.getConnection(url, user, password);
-				Statement stmt = connection.createStatement()) {
-			try (ResultSet rs = stmt.executeQuery("DELETE FROM players WHERE name='" + playerName + "';")) {
-				connection.close();
+		Statement stmt = connection.createStatement()) {
+			int rs = stmt.executeUpdate("DELETE FROM players WHERE name='" + playerName + "';");
+			connection.close();
+			if (rs != -1) {
 				return true;
-			}
+			} 
 		} catch (SQLException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return false;
@@ -126,7 +119,6 @@ public class sqlInterface {
 					playerInfo[3] = rs.getString(4);
 					playerInfo[4] = rs.getString(5);
 					playerInfo[5] = rs.getString(6);
-					playerInfo[6] = rs.getString(7);
 					return playerInfo;
 				}
 				connection.close();
