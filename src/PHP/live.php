@@ -67,13 +67,143 @@ body {
         height: 20px;
     }
     #leftwrapper {
-        border: solid;
-        border-color:white;
+        
         width: 100px;
-        height: 300px;
+        height: 340px;
         margin-left: 200px;
-        margin-top: 200px;
+        margin-top: 150px;
+        color: white;
     }
+    #rightwrapper {
+    
+        width: 100px;
+        height: 340px;
+        margin-right: 200px;
+        margin-top: -350px;
+        color: white;
+        float: right;
+    }
+    
+    #selecthome{
+    list-style:none;
+    margin-bottom:10px;
+    float:left; /* Clear floats */
+    width:140px;
+    position:relative;
+    z-index:5;  
+    left: -10px;
+    top: 10px;
+}
+    
+    #selecthome li{
+    float:left;
+    margin-right:10px;
+    position:relative;
+}
+#selecthome a{
+    display:block;
+    padding:5px;
+    color:#fff;
+    background:#333;
+    text-decoration:none;
+}
+#selecthome a:hover{
+    color:#fff;
+    background:#6b0c36;
+    text-decoration:underline;
+}
+
+/*--- DROPDOWN ---*/
+#selecthome ul{
+    background:black; /* Adding a background makes the dropdown work properly in IE7+. Make this as close to your page's background as possible (i.e. white page == white background). */
+    background:rgba(255,255,255,0); /* But! Let's make the background fully transparent where we can, we don't actually want to see it if we can help it... */
+    list-style:none;
+    position:absolute;
+    left:-9999px; /* Hide off-screen when not needed (this is more accessible than display:none;) */
+}
+#selecthome ul li{
+    padding-top:1px; /* Introducing a padding between the li and the a give the illusion spaced items */
+    float:none;
+}
+#selecthome ul a{
+    white-space:nowrap; /* Stop text wrapping and creating multi-line dropdown items */
+}
+#selecthome li:hover ul{ /* Display the dropdown on hover */
+    left:-40px; /* Bring back on-screen when needed */
+    
+}
+#selecthome li:hover a{ /* These create persistent hover states, meaning the top-most link stays 'hovered' even when your cursor has moved down the list. */
+    background-color: dimgray;
+    text-decoration:underline;
+}
+#selecthome li:hover ul a{ /* The persistent hover state does however create a global style for links even before they're hovered. Here we undo these effects. */
+    text-decoration:none;
+}
+#selecthome li:hover ul li a:hover{ /* Here we define the most explicit hover states--what happens when you hover each individual link. */
+    background:#333;
+}
+    
+    
+       #selectaway{
+    list-style:none;
+    margin-bottom:10px;
+    float:left; /* Clear floats */
+    width:140px;
+    position:relative;
+    z-index:5;  
+    right: -175px;
+    top: 10px;
+}
+    
+    #selectaway li{
+    float:left;
+    margin-right:10px;
+    position:relative;
+}
+#selectaway a{
+    display:block;
+    padding:5px;
+    color:#fff;
+    background:#333;
+    text-decoration:none;
+}
+#selectaway a:hover{
+    color:#fff;
+    background:#6b0c36;
+    text-decoration:underline;
+}
+
+/*--- DROPDOWN ---*/
+#selectaway ul{
+    background:black; /* Adding a background makes the dropdown work properly in IE7+. Make this as close to your page's background as possible (i.e. white page == white background). */
+    background:rgba(255,255,255,0); /* But! Let's make the background fully transparent where we can, we don't actually want to see it if we can help it... */
+    list-style:none;
+    position:absolute;
+    left:-9999px; /* Hide off-screen when not needed (this is more accessible than display:none;) */
+}
+#selectaway ul li{
+    padding-top:1px; /* Introducing a padding between the li and the a give the illusion spaced items */
+    float:none;
+}
+#selectaway ul a{
+    white-space:nowrap; /* Stop text wrapping and creating multi-line dropdown items */
+}
+#selectaway li:hover ul{ /* Display the dropdown on hover */
+    left:-40px; /* Bring back on-screen when needed */
+    
+}
+#selectaway li:hover a{ /* These create persistent hover states, meaning the top-most link stays 'hovered' even when your cursor has moved down the list. */
+    background-color: dimgray;
+    text-decoration:underline;
+}
+#selectaway li:hover ul a{ /* The persistent hover state does however create a global style for links even before they're hovered. Here we undo these effects. */
+    text-decoration:none;
+}
+#selectaway li:hover ul li a:hover{ /* Here we define the most explicit hover states--what happens when you hover each individual link. */
+    background:#333;
+}
+    
+    
     
      #nav{
     list-style:none;
@@ -244,18 +374,96 @@ body {
     </li>  
 </ul>
 
+    <ul id="selecthome"> 
+    <li>
+        <a href="#">Home Team</a>
+        <ul>
+            <li><a href="#">Manchester United</a></li>
+            <li><a href="#">Barcelona</a></li>
+            <li><a href="#">Chelsea</a></li>
+            <li><a href="#">Real Madrid</a></li>
+            <li><a href="#">Manchester City</a></li>
+        </ul>
+    </li>  
+</ul>
+    
+    <ul id="selectaway"> 
+    <li>
+        <a href="#">Away Team</a>
+        <ul>
+            <li><a href="#">Spurs</a></li>
+            <li><a href="#">Giants</a></li>
+            <li><a href="#">Tigers</a></li>
+            <li><a href="#">Leopards</a></li>
+            <li><a href="#">Filthy Dogs</a></li>
+        </ul>
+    </li>  
+</ul>
+    
     <div id="leftwrapper">
+        <h3>Shot</h3>
+        <div id="addshot">
+            <button onclick="#">Missed Shot</button>
+            <p id="demo"> </p>
+        </div>
+        <div id="addshotontarget">
+            <button onclick="#">Shot on Target</button>
+            <p id="demo"> </p>
+        </div>
         <div id="addgoal">
             <button onclick="#">Goal</button>
             <p id="demo"> </p>
         </div>
-        <div id="missedshot">
+        <h3>Infraction</h3>
+        <div id="addfoul">
+            <button onclick="#">Foul</button>
+            <p id="demo"> </p>
+        </div>
+        <div id="addyellow">
+            <button onclick="#">Yellow Card</button>
+            <p id="demo"> </p>
+        </div>
+        <div id="addred">
+            <button onclick="#">Red Card</button>
+            <p id="demo"> </p>
+        </div>
+         <div id="addpenalty">
+            <button onclick="#">Penalty</button>
+            <p id="demo"> </p>
+        </div>
+    </div>
+    
+     <div id="rightwrapper">
+        <h3>Shot</h3>
+        <div id="addshot1">
             <button onclick="#">Missed Shot</button>
             <p id="demo"> </p>
         </div>
-        
-        
-        
+        <div id="addshotontarget1">
+            <button onclick="#">Shot on Target</button>
+            <p id="demo"> </p>
+        </div>
+        <div id="addgoal1">
+            <button onclick="#">Goal</button>
+            <p id="demo"> </p>
+        </div>
+        <h3>Infraction</h3>
+        <div id="addfoul1">
+            <button onclick="#">Foul</button>
+            <p id="demo"> </p>
+        </div>
+        <div id="addyellow1">
+            <button onclick="#">Yellow Card</button>
+            <p id="demo"> </p>
+        </div>
+        <div id="addred1">
+            <button onclick="#">Red Card</button>
+            <p id="demo"> </p>
+        </div>
+         <div id="addpenalty1">
+            <button onclick="#">Penalty</button>
+            <p id="demo"> </p>
+        </div>
     </div>
     
     
