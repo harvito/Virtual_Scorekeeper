@@ -141,22 +141,29 @@ public class sqlInterface {
 		String url = "jdbc:mysql://159.203.11.244:3306/filthybase";
 		String user = "filthyuser";
 		String password = "filthypass";
-		String[][] playersInfo = new String[16][4];
+		int rows = 20;
+		int columns = 6;
+		if (teamName=="all") {
+			rows = 320;
+		}
+		String[][] playersInfo = new String[rows][columns];
 		int i = 0;
 		try (Connection connection = DriverManager.getConnection(url, user, password);
 				Statement stmt = connection.createStatement()) {
 			try (ResultSet rs = stmt.executeQuery("SELECT * FROM players WHERE currentTeam='" + teamName + "';")) {
-				connection.close();
 				if (rs != null) {
-					do {
-						playersInfo[i][0] = rs.getString(0);
-						playersInfo[i][1] = rs.getString(1);
-						playersInfo[i][2] = rs.getString(2);
-						playersInfo[i][3] = rs.getString(3);
+					while (rs.next()) {
+						playersInfo[i][0] = rs.getString(1);
+						playersInfo[i][1] = rs.getString(2);
+						playersInfo[i][2] = rs.getString(3);
+						playersInfo[i][3] = rs.getString(4);
+						playersInfo[i][4] = rs.getString(5);
+						playersInfo[i][5] = rs.getString(6);
 						i++;
-					} while (rs.next());
+					}
 					return playersInfo;
 				}
+				connection.close();
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
