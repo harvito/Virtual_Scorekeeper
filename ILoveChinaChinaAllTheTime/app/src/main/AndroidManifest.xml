@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="ca.hornyelgin.ilovechinachinaallthetime">
+
+    <application
+        android:debuggable="true"
+        android:allowBackup="true"
+        android:icon="@mipmap/trump_icon"
+        android:label="China All The Time"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".MainActivity"
+            android:label="TRUMPSTEP HARD"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".secondScreen"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:label="Name and Hair">
+
+        </activity>
+    </application>
+
+</manifest>

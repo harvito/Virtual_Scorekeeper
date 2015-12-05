@@ -23,15 +23,14 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_weight="1" />
 
-            <TextView
+            <Chronometer
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="@string/match_time"
-                android:id="@+id/textView5"
+                android:id="@+id/chronometer"
                 android:layout_column="1"
-                android:layout_gravity="center_horizontal"
-                android:layout_weight="1" />
+                android:editable="true"
+                android:inputType="number"
+                android:text="90" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -54,7 +53,7 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="@string/team_a"
-                android:id="@+id/textView4"
+                android:id="@+id/team1"
                 android:layout_column="0"
                 android:layout_weight="1"
                 android:layout_gravity="center_horizontal" />
@@ -73,7 +72,7 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="@string/team_b"
-                android:id="@+id/textView8"
+                android:id="@+id/team2"
                 android:layout_column="2"
                 android:layout_weight="1"
                 android:layout_gravity="center_horizontal" />
@@ -99,7 +98,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="autofilled"
-            android:id="@+id/textView9" />
+            android:id="@+id/autoDate" />
 
     </LinearLayout>
 
@@ -122,7 +121,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="autofilled"
-            android:id="@+id/textView11" />
+            android:id="@+id/autoLocation" />
     </LinearLayout>
 
     <LinearLayout
@@ -136,8 +135,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/spinner"
             android:layout_gravity="center_horizontal"
-            android:spinnerMode="dropdown"
-            android:entries="" />
+            android:spinnerMode="dropdown" />
 
         <LinearLayout
             android:orientation="horizontal"
@@ -220,9 +218,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Add Shot"
-                android:id="@+id/button2"
+                android:id="@+id/addShot"
                 android:layout_gravity="center_horizontal"
-                android:onClick="addShot()"/>
+                android:onClick="onAddShot()"/>
         </LinearLayout>
 
         <LinearLayout
@@ -282,10 +280,10 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="ADD INFRACTION"
-                android:id="@+id/button3"
+                android:text="Add Infraction"
+                android:id="@+id/addInfraction"
                 android:layout_gravity="center_horizontal"
-                android:onClick="addInfracion()"/>
+                android:onClick="onAddInfracion()"/>
 
         </LinearLayout>
 
@@ -300,7 +298,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="END GAME"
-            android:id="@+id/button4" />
+            android:id="@+id/button4"
+            android:onClick="onLiveMatchFinish"/>
 
         <Button
             android:layout_width="wrap_content"
