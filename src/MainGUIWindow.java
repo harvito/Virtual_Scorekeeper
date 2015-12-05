@@ -318,6 +318,19 @@ public class MainGUIWindow {
 		panel.add(buttonPanel);
 		
 		JButton btnNewButton = new JButton("Create Player");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (textField.getText()!= null){
+					boolean goalkeeper=false;
+					if(textField_2.getText()=="Goalkeeper") 
+						goalkeeper = true;
+					new Player (textField.getText(),Integer.parseInt(textField_1.getText()),goalkeeper);
+					sqlInterface.addPlayer(textField.getText(), Integer.parseInt(textField_1.getText()), Integer.parseInt(textField_3.getText()), Integer.parseInt(textField_4.getText()), goalkeeper);
+				} else {
+					JOptionPane.showMessageDialog(null, "There was no name entered for player!","Error",JOptionPane.ERROR_MESSAGE);
+				}
+			}
+		});
 		buttonPanel.add(btnNewButton);
 		
 		JButton btnLoadPlayerData = new JButton("Load Player Data");

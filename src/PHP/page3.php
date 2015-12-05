@@ -4,7 +4,7 @@
   <title>Virtual Scorekeeper</title>
 <style>
 body {
-    background-image: url("http://www.footballhdwallpapers.net/uploads/content/green-football-stadium-hd-wallpapers-1080p-hd-wallpapers.jpg");
+   background-image: url("background.jpg");
     background-repeat: no-repeat;
     background-position: centre centre;
     max-width: 100%;
@@ -139,20 +139,7 @@ right: 10%;
 
 <a href="http://localhost:8888/Page2a.php"> <strong> View Player Rankings </strong> </a>
 </div>
-
-<div id="adminactions";>
-    <div id="title"> <strong> Admin Actions </strong>  </div>
-    <a id="adminoptions" href="http://localhost:8888/Page2a.php"> <strong> Create Team </strong> </a>
-    <a id="adminoptions" href="http://localhost:8888/Page2a.php"> <strong> Create Player </strong> </a>
-    <a id="adminoptions" href="http://localhost:8888/Page2a.php"> <strong> Live Score Input </strong> </a>
-    <a id="adminoptions" href="http://localhost:8888/Page2a.php"> <strong> Batch Score Input </strong> </a>
-    
-    </div>    
-    
-    
-    
-    
-
+ 
 
 </body>
 </html>

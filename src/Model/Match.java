@@ -1,34 +1,28 @@
-package team3;
+package Model;
 /*PLEASE DO NOT EDIT THIS CODE*/
 /*This code was generated using the UMPLE 1.22.0.5146 modeling language!*/
 
 
+import java.sql.Date;
 import java.util.*;
 
-// line 16 "model.ump"
-// line 51 "model.ump"
-public class Player
+// line 8 "newModel.ump"
+// line 57 "newModel.ump"
+public class Match
 {
-
-  //------------------------
-  // STATIC VARIABLES
-  //------------------------
-
-  private static int nextPlayerID = 1;
 
   //------------------------
   // MEMBER VARIABLES
   //------------------------
 
-  //Player Attributes
-  private String playerName;
-  private int jerseyNumber;
-  private boolean GoalKeeper;
+  //Match Attributes
+  private Date date;
+  private String location;
+  private int goals1;
+  private int goals2;
 
-  //Autounique Attributes
-  private int playerID;
-
-  //Player Associations
+  //Match Associations
+  private List<Team> teams;
   private List<Shot> shots;
   private List<Infraction> infractions;
 
@@ -36,12 +30,18 @@ public class Player
   // CONSTRUCTOR
   //------------------------
 
-  public Player(String aPlayerName, int aJerseyNumber, boolean aGoalKeeper)
+  public Match(Date aDate, String aLocation, int aGoals1, int aGoals2, Team... allTeams)
   {
-    playerName = aPlayerName;
-    jerseyNumber = aJerseyNumber;
-    GoalKeeper = aGoalKeeper;
-    playerID = nextPlayerID++;
+    date = aDate;
+    location = aLocation;
+    goals1 = aGoals1;
+    goals2 = aGoals2;
+    teams = new ArrayList<Team>();
+    boolean didAddTeams = setTeams(allTeams);
+    if (!didAddTeams)
+    {
+      throw new RuntimeException("Unable to create Match, must have 2 teams");
+    }
     shots = new ArrayList<Shot>();
     infractions = new ArrayList<Infraction>();
   }
@@ -50,48 +50,88 @@ public class Player
   // INTERFACE
   //------------------------
 
-  public boolean setPlayerName(String aPlayerName)
+
+  public boolean setDate(Date aDate)
   {
     boolean wasSet = false;
-    playerName = aPlayerName;
+    date = aDate;
     wasSet = true;
     return wasSet;
   }
 
-  public boolean setJerseyNumber(int aJerseyNumber)
+  public boolean setLocation(String aLocation)
   {
     boolean wasSet = false;
-    jerseyNumber = aJerseyNumber;
+    location = aLocation;
     wasSet = true;
     return wasSet;
   }
 
-  public boolean setGoalKeeper(boolean aGoalKeeper)
+  public boolean setGoals1(int aGoals1)
   {
     boolean wasSet = false;
-    GoalKeeper = aGoalKeeper;
+    goals1 = aGoals1;
     wasSet = true;
     return wasSet;
   }
 
-  public String getPlayerName()
+  public boolean setGoals2(int aGoals2)
   {
-    return playerName;
+    boolean wasSet = false;
+    goals2 = aGoals2;
+    wasSet = true;
+    return wasSet;
   }
 
-  public int getJerseyNumber()
+
+  public Date getDate()
   {
-    return jerseyNumber;
+    return date;
   }
 
-  public boolean getGoalKeeper()
+  public String getLocation()
   {
-    return GoalKeeper;
+    return location;
   }
 
-  public int getPlayerID()
+  public int getGoals1()
   {
-    return playerID;
+    return goals1;
+  }
+
+  public int getGoals2()
+  {
+    return goals2;
+  }
+
+  public Team getTeam(int index)
+  {
+    Team aTeam = teams.get(index);
+    return aTeam;
+  }
+
+  public List<Team> getTeams()
+  {
+    List<Team> newTeams = Collections.unmodifiableList(teams);
+    return newTeams;
+  }
+
+  public int numberOfTeams()
+  {
+    int number = teams.size();
+    return number;
+  }
+
+  public boolean hasTeams()
+  {
+    boolean has = teams.size() > 0;
+    return has;
+  }
+
+  public int indexOfTeam(Team aTeam)
+  {
+    int index = teams.indexOf(aTeam);
+    return index;
   }
 
   public Shot getShot(int index)
@@ -152,6 +192,45 @@ public class Player
   {
     int index = infractions.indexOf(aInfraction);
     return index;
+  }
+
+  public static int requiredNumberOfTeams()
+  {
+    return 2;
+  }
+
+  public static int minimumNumberOfTeams()
+  {
+    return 2;
+  }
+
+  public static int maximumNumberOfTeams()
+  {
+    return 2;
+  }
+
+  public boolean setTeams(Team... newTeams)
+  {
+    boolean wasSet = false;
+    ArrayList<Team> verifiedTeams = new ArrayList<Team>();
+    for (Team aTeam : newTeams)
+    {
+      if (verifiedTeams.contains(aTeam))
+      {
+        continue;
+      }
+      verifiedTeams.add(aTeam);
+    }
+
+    if (verifiedTeams.size() != newTeams.length || verifiedTeams.size() != requiredNumberOfTeams())
+    {
+      return wasSet;
+    }
+
+    teams.clear();
+    teams.addAll(verifiedTeams);
+    wasSet = true;
+    return wasSet;
   }
 
   public static int minimumNumberOfShots()
@@ -270,6 +349,7 @@ public class Player
 
   public void delete()
   {
+    teams.clear();
     shots.clear();
     infractions.clear();
   }
@@ -279,10 +359,10 @@ public class Player
   {
 	  String outputString = "";
     return super.toString() + "["+
-            "playerID" + ":" + getPlayerID()+ "," +
-            "playerName" + ":" + getPlayerName()+ "," +
-            "jerseyNumber" + ":" + getJerseyNumber()+ "," +
-            "GoalKeeper" + ":" + getGoalKeeper()+ "]"
+            "location" + ":" + getLocation()+ "," +
+            "goals1" + ":" + getGoals1()+ "," +
+            "goals2" + ":" + getGoals2()+ "]" + System.getProperties().getProperty("line.separator") +
+            "  " + "date" + "=" + (getDate() != null ? !getDate().equals(this)  ? getDate().toString().replaceAll("  ","    ") : "this" : "null")
      + outputString;
   }
 }

@@ -1,12 +1,12 @@
-package team3;
+package Model;
 /*PLEASE DO NOT EDIT THIS CODE*/
 /*This code was generated using the UMPLE 1.22.0.5146 modeling language!*/
 
 
 import java.util.*;
 
-// line 9 "model.ump"
-// line 46 "model.ump"
+// line 20 "newModel.ump"
+// line 62 "newModel.ump"
 public class Team
 {
 
@@ -15,7 +15,7 @@ public class Team
   //------------------------
 
   //Team Attributes
-  private String teamName;
+  private String name;
   private int points;
 
   //Team Associations
@@ -25,9 +25,9 @@ public class Team
   // CONSTRUCTOR
   //------------------------
 
-  public Team(String aTeamName, int aPoints)
+  public Team(String aName, int aPoints)
   {
-    teamName = aTeamName;
+    name = aName;
     points = aPoints;
     players = new ArrayList<Player>();
   }
@@ -36,10 +36,10 @@ public class Team
   // INTERFACE
   //------------------------
 
-  public boolean setTeamName(String aTeamName)
+  public boolean setName(String aName)
   {
     boolean wasSet = false;
-    teamName = aTeamName;
+    name = aName;
     wasSet = true;
     return wasSet;
   }
@@ -52,9 +52,9 @@ public class Team
     return wasSet;
   }
 
-  public String getTeamName()
+  public String getName()
   {
-    return teamName;
+    return name;
   }
 
   public int getPoints()
@@ -100,6 +100,7 @@ public class Team
   public boolean addPlayer(Player aPlayer)
   {
     boolean wasAdded = false;
+    if (players.contains(aPlayer)) { return false; }
     if (players.contains(aPlayer)) { return false; }
     players.add(aPlayer);
     wasAdded = true;
@@ -159,7 +160,7 @@ public class Team
   {
 	  String outputString = "";
     return super.toString() + "["+
-            "teamName" + ":" + getTeamName()+ "," +
+            "name" + ":" + getName()+ "," +
             "points" + ":" + getPoints()+ "]"
      + outputString;
   }

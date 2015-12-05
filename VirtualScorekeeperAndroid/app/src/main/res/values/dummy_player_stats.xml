@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+        <string-array name="a1Stats">
+            <item>Albert</item>
+            <item>4</item>
+            <item>9</item>
+        </string-array>
+        <string-array name="a2Stats">
+            <item>Bob</item>
+            <item>1</item>
+            <item>12</item>
+        </string-array>
+        <string-array name="a3Stats">
+            <item>Charlie</item>
+            <item>5</item>
+            <item>13</item>
+        </string-array>
+</resources>

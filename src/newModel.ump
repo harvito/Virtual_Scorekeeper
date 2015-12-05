@@ -1,0 +1,80 @@
+class Manager
+{
+  singleton;
+  1 -> * Team teams;
+  1 -> * Match matches;
+}
+
+class Match
+{
+  String name;
+  Date date;
+  String location;
+  Integer goals1;
+  Integer goals2;
+  1 -> 2 Team teams;
+  1 -> * Shot shots;
+  1 -> * Infraction infractions;
+}
+
+class Team
+{
+  String name;
+  Integer points;
+  1 -> * Player players;
+}
+
+class Player
+{
+  String name;
+  int JerseyNumber;
+  int height;
+  int weight;
+  1 -> * Infraction infractions;
+  1 -> * Shot shots;
+  * -> 1 Team team;
+}
+
+class Infraction
+{
+  boolean isRedCard;
+  boolean isYellowCard;
+  boolean isOther;
+  boolean isPenalty;
+}
+
+class Shot
+{
+  boolean isGoal;
+  boolean isOnTarget;
+}//$?[End_of_model]$?
+
+class Manager
+{
+  position 50 30 109 45;
+}
+
+class Match
+{
+  position 50 130 109 45;
+}
+
+class Team
+{
+  position 50 230 109 45;
+}
+
+class Player
+{
+  position 50 330 109 45;
+}
+
+class Infraction
+{
+  position 50 430 109 45;
+}
+
+class Shot
+{
+  position 250 30 109 45;
+}
