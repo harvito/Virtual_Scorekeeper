@@ -193,15 +193,6 @@ public class MainGUIWindow {
 		ControlPanel.add(formattedTextField_4);
 		
 		JButton btnCreateTeam = new JButton("Create Team");
-		//I added an action to this button
-		//I used the constructor from the umple model
-		//This somehow has to connect with LOU's database
-		btnCreateTeam.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				new Team (formattedTextField_4.getText(),0);
-			}
-		});
-		//Comment to know what i added to this code
 		ControlPanel.add(btnCreateTeam);
 		
 		JLabel lblChooseTeam = new JLabel("Choose Team:");
@@ -289,18 +280,6 @@ public class MainGUIWindow {
 		panel.add(buttonPanel);
 		
 		JButton btnNewButton = new JButton("Create Player");
-		//I have added an action to this button
-		//My player is created using the constructor give by Player class
-		//Need a way to incorporate height and weight and send to database....LOU
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				boolean goalkeeper=false;
-				if(textField_2.getText()=="Goalkeeper") 
-					goalkeeper = true;
-				new Player(textField.getText(),Integer.parseInt(textField_1.getText()),goalkeeper);
-			}
-		});
-		//Extra comment to know what I added in
 		buttonPanel.add(btnNewButton);
 		
 		JButton btnLoadPlayerData = new JButton("Load Player Data");

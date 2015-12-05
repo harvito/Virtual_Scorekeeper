@@ -455,18 +455,197 @@ public class Controller
 		}
 	}
 	
+	//sort teams by points
+	public void sortTeamsByPoints (Team[] teams)
+	{
+		for(int i=1; i<teams.length;i++)
+		{
+			if(teams[i-1].getPoints() > teams[i].getPoints())
+			{
+				Team temp = new Team("temp",0);
+				temp = teams[i-1];
+				teams[i-1]=teams[i];
+				teams[i]=temp;
+			}
+		}
+	}
+	
+	//sort teams by reds
+	public void sortTeamReds(Team[] teams)
+	{
+		int i =0;
+		int j =0;
+		
+		for(int k=1; k<teams.length; k++)
+		{
+			for(int z=1; z<teams[k-1].numberOfPlayers();z++)
+			{
+				List<Infraction> s1 = teams[k-1].getPlayer(z).getInfractions();
+				for (Infraction s: s1)
+				{
+					if(s.getIsRedCard()==true)
+					{
+						i++;
+					}
+				}
+			}
+			
+			for(int z=1; z<teams[k].numberOfPlayers();z++)
+			{
+				List<Infraction> s2 = teams[k].getPlayer(z).getInfractions();
+				for (Infraction s: s2)
+				{
+					if(s.getIsRedCard()==true)
+					{
+						j++;
+					}
+				}
+			}
+			
+			if(i>j)
+			{
+				Team temp = new Team("temp",0);
+				temp = teams[k-1];
+				teams[k-1]=teams[k];
+				teams[k]=temp;
+			}
+		}
+	}
+	
+	//sort teams by yellows
+	public void sortTeamYellows(Team[] teams)
+	{
+		int i =0;
+		int j =0;
+		
+		for(int k=1; k<teams.length; k++)
+		{
+			for(int z=1; z<teams[k-1].numberOfPlayers();z++)
+			{
+				List<Infraction> s1 = teams[k-1].getPlayer(z).getInfractions();
+				for (Infraction s: s1)
+				{
+					if(s.getIsYellowCard()==true)
+					{
+						i++;
+					}
+				}
+			}
+			
+			for(int z=1; z<teams[k].numberOfPlayers();z++)
+			{
+				List<Infraction> s2 = teams[k].getPlayer(z).getInfractions();
+				for (Infraction s: s2)
+				{
+					if(s.getIsYellowCard()==true)
+					{
+						j++;
+					}
+				}
+			}
+			
+			if(i>j)
+			{
+				Team temp = new Team("temp",0);
+				temp = teams[k-1];
+				teams[k-1]=teams[k];
+				teams[k]=temp;
+			}
+		}
+	}
+	
+	//sort teams by penalties
+	public void sortTeamPenalties(Team[] teams)
+	{
+		int i =0;
+		int j =0;
+		
+		for(int k=1; k<teams.length; k++)
+		{
+			for(int z=1; z<teams[k-1].numberOfPlayers();z++)
+			{
+				List<Infraction> s1 = teams[k-1].getPlayer(z).getInfractions();
+				for (Infraction s: s1)
+				{
+					if(s.getIsPenalty()==true)
+					{
+						i++;
+					}
+				}
+			}
+			
+			for(int z=1; z<teams[k].numberOfPlayers();z++)
+			{
+				List<Infraction> s2 = teams[k].getPlayer(z).getInfractions();
+				for (Infraction s: s2)
+				{
+					if(s.getIsPenalty()==true)
+					{
+						j++;
+					}
+				}
+			}
+			
+			if(i>j)
+			{
+				Team temp = new Team("temp",0);
+				temp = teams[k-1];
+				teams[k-1]=teams[k];
+				teams[k]=temp;
+			}
+		}
+	}
+	
+	//sort teams by others
+	public void sortTeamOthers(Team[] teams)
+	{
+		int i =0;
+		int j =0;
+		
+		for(int k=1; k<teams.length; k++)
+		{
+			for(int z=1; z<teams[k-1].numberOfPlayers();z++)
+			{
+				List<Infraction> s1 = teams[k-1].getPlayer(z).getInfractions();
+				for (Infraction s: s1)
+				{
+					if(s.getIsOther()==true)
+					{
+						i++;
+					}
+				}
+			}
+			
+			for(int z=1; z<teams[k].numberOfPlayers();z++)
+			{
+				List<Infraction> s2 = teams[k].getPlayer(z).getInfractions();
+				for (Infraction s: s2)
+				{
+					if(s.getIsOther()==true)
+					{
+						j++;
+					}
+				}
+			}
+			
+			if(i>j)
+			{
+				Team temp = new Team("temp",0);
+				temp = teams[k-1];
+				teams[k-1]=teams[k];
+				teams[k]=temp;
+			}
+		}
+	}
+
 	
 	
+
+	
 	
 		
 		
 	
-		
-		
-		
-	
-		
-		
 		
 		
 	//Last Paranthesis	
