@@ -118,13 +118,14 @@ public class MainGUIWindow {
 		JLabel lblSortBy = new JLabel("Sort By:");
 		PlayersOptionPanel.add(lblSortBy);
 		
-		JComboBox comboBox_1 = new JComboBox();
+		String[] sortBy = {"Player","Jersey Number","Height","Weight", "Position", "Time"};		
+		JComboBox comboBox_1 = new JComboBox(sortBy);
 		PlayersOptionPanel.add(comboBox_1);
 		
 		JPanel panel_3 = new JPanel();
 		PlayersPanel.add(panel_3, BorderLayout.CENTER);
 
-		playersTable = new JTable(20, 6);
+		playersTable = new JTable(new playersTableModel());
 		PlayersPanel.add(playersTable, BorderLayout.WEST);
 		
 		JPanel TeamsPanel = new JPanel();
