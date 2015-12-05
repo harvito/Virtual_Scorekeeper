@@ -82,4 +82,6 @@ public class liveInfoPop extends Activity {
         }
         else Toast.makeText(this, "Teams must differ", Toast.LENGTH_SHORT).show();
     }
+
+
 }

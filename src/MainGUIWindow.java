@@ -29,6 +29,11 @@ import java.awt.GridBagConstraints;
 import java.awt.GridLayout;
 import javax.swing.ListSelectionModel;
 import javax.swing.border.BevelBorder;
+
+import Model.Manager;
+import Model.Player;
+import Model.Team;
+
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
 import java.awt.Component;
@@ -47,12 +52,11 @@ public class MainGUIWindow {
 	private JTable table_1;
 	private JTable currentTeamsPlayers;
 	private JTable freeAgents;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
+	private JTextField nameField;
+	private JTextField jerseyNumberField;
 	private JTable table_4;
-	private JTextField textField_3;
-	private JTextField textField_4;
+	private JTextField heightField;
+	private JTextField weightField;
 	private JTable table_5;
 	private JTextField textField_5;
 	private JTextField textField_6;
@@ -216,7 +220,11 @@ public class MainGUIWindow {
 		btnCreateTeam.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if (newTeamNameField.getText() != null) {
-					sqlInterface.addTeam(newTeamNameField.getText());
+					Team tempTeam = new Team(newTeamNameField.getText(), 0);
+					Manager.getInstance().addTeam(tempTeam);
+					if (Manager.getInstance().getTeams().size() != 0) {
+						System.out.println("IT WORKED JOHNNY, IT WORKED!");
+					}
 				} else {
 					JOptionPane.showMessageDialog(null, "There was no name entered for a team!", "Error", JOptionPane.ERROR_MESSAGE);
 				}
@@ -270,9 +278,9 @@ public class MainGUIWindow {
 		JLabel lblName = new JLabel("Name:");
 		namePanel.add(lblName);
 		
-		textField = new JTextField();
-		namePanel.add(textField);
-		textField.setColumns(10);
+		nameField = new JTextField();
+		namePanel.add(nameField);
+		nameField.setColumns(10);
 		
 		JPanel numberPanel = new JPanel();
 		panel.add(numberPanel);
@@ -280,19 +288,9 @@ public class MainGUIWindow {
 		JLabel lblJerseyNumber = new JLabel("Jersey Number:");
 		numberPanel.add(lblJerseyNumber);
 		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		numberPanel.add(textField_1);
-		
-		JPanel preferedPositionPanel = new JPanel();
-		panel.add(preferedPositionPanel);
-		
-		JLabel lblPreferedPositionif = new JLabel("Prefered Position (if applicable)");
-		preferedPositionPanel.add(lblPreferedPositionif);
-		
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
-		preferedPositionPanel.add(textField_2);
+		jerseyNumberField = new JTextField();
+		jerseyNumberField.setColumns(10);
+		numberPanel.add(jerseyNumberField);
 		
 		JPanel heightPanel = new JPanel();
 		panel.add(heightPanel);
@@ -300,9 +298,9 @@ public class MainGUIWindow {
 		JLabel lblPlayerHeight = new JLabel("Player Height:");
 		heightPanel.add(lblPlayerHeight);
 		
-		textField_3 = new JTextField();
-		textField_3.setColumns(10);
-		heightPanel.add(textField_3);
+		heightField = new JTextField();
+		heightField.setColumns(10);
+		heightPanel.add(heightField);
 		
 		JPanel weightPanel = new JPanel();
 		panel.add(weightPanel);
@@ -310,28 +308,37 @@ public class MainGUIWindow {
 		JLabel lblPlayerWeight = new JLabel("Player Weight:");
 		weightPanel.add(lblPlayerWeight);
 		
-		textField_4 = new JTextField();
-		textField_4.setColumns(10);
-		weightPanel.add(textField_4);
+		weightField = new JTextField();
+		weightField.setColumns(10);
+		weightPanel.add(weightField);
 		
 		JPanel buttonPanel = new JPanel();
 		panel.add(buttonPanel);
 		
-		JButton btnNewButton = new JButton("Create Player");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if (textField.getText()!= null){
-					boolean goalkeeper=false;
-					if(textField_2.getText()=="Goalkeeper") 
-						goalkeeper = true;
-					new Player (textField.getText(),Integer.parseInt(textField_1.getText()),goalkeeper);
-					sqlInterface.addPlayer(textField.getText(), Integer.parseInt(textField_1.getText()), Integer.parseInt(textField_3.getText()), Integer.parseInt(textField_4.getText()), goalkeeper);
+		JButton createPlayerButton = new JButton("Create Player");
+		createPlayerButton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				if (nameField.getText() != null && jerseyNumberField.getText() != null &&
+						heightField.getText() != null && weightField.getText() != null) {
+					Team tempTeam = new Team(newTeamNameField.getText(), 0);
+					Manager.getInstance().addTeam(tempTeam);
+					if (Manager.getInstance().getTeams().size() != 0) {
+						Player tempPlayer = new Player(nameField.getText(), Integer.valueOf(jerseyNumberField.getText()), Integer.valueOf(heightField.getText()), Integer.valueOf(weightField.getText()), tempTeam);
+						Manager.getInstance().getTeam(0).addPlayer(tempPlayer);
+						if (Manager.getInstance().getTeam(0).getPlayers().size() != 0) {
+							System.out.println("IT WORKED AGAIN JOHNNY, WE'RE ON A ROLL!");
+						}
+					}
 				} else {
-					JOptionPane.showMessageDialog(null, "There was no name entered for player!","Error",JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "There was not all the req'd information added.", "Error", JOptionPane.ERROR_MESSAGE);
 				}
 			}
+
 		});
-		buttonPanel.add(btnNewButton);
+		buttonPanel.add(createPlayerButton);
 		
 		JButton btnLoadPlayerData = new JButton("Load Player Data");
 		buttonPanel.add(btnLoadPlayerData);
@@ -609,6 +616,7 @@ public class MainGUIWindow {
 				LiveScoreInputPanel.setVisible(false);
 				BatchScoreInputPanel.setVisible(false);
 				FilthiestPanel.setVisible(false);
+				
 			}
 		});
 		mnView.add(mntmPlayerRankings);

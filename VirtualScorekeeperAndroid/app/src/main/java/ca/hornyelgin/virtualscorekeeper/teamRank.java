@@ -48,11 +48,7 @@ public class teamRank extends android.support.v7.app.AppCompatActivity {
             final int result = 1;
             startActivity(playerRank);
         }
-        else if (id == R.id.action_admin_login) {
-            Intent adminLogin = new Intent(this, ca.hornyelgin.virtualscorekeeper.LoginActivity.class);
-            final int result = 1;
-            startActivity(adminLogin);
-        }
+
         else if (id == R.id.action_live_input) {
             Intent liveInput = new Intent(this, liveMatch.class);
             final int result = 1;

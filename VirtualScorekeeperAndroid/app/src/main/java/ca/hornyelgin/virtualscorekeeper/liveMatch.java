@@ -73,6 +73,10 @@ public class liveMatch extends android.support.v7.app.AppCompatActivity {
 
     }
 
+    public void onAddInfraction() {
+
+    }
+
     public void onLiveMatchFinish(View view) {
 
     }
