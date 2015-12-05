@@ -4,7 +4,7 @@
   <title>Virtual Scorekeeper</title>
 <style>
 body {
-    background-image: url("http://www.footballhdwallpapers.net/uploads/content/green-football-stadium-hd-wallpapers-1080p-hd-wallpapers.jpg");
+    background-image: url("background.jpg");
     background-repeat: no-repeat;
     background-position: centre centre;
     max-width: 100%;
@@ -64,22 +64,24 @@ top: 30%;
 right: 10%;
 }
 #adminlogin {
-color:black;
+color:whitesmoke;
 line-height:30px;
-height:20px;
-width:200px;
+height:150px;
+width:225px;
 float:right;
 padding:0px;
 position: fixed;
-bottom: 275px;
-right: 50px;
+bottom: 0px;
+right: 0px;
+
+    font-size: 1em;
+    border-radius: 10px;
 }
 
 
 
 </style>
-       <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
-  <META HTTP-EQUIV="PRAGMA" CONTENT="NO-CACHE">
+      
  </head>
 
 <body>
@@ -91,27 +93,46 @@ right: 50px;
 
 
 <div id="teamrankings">
-<a href="http://localhost:8888/Page2a.php"> <strong> View Team Rankings </strong> </a>
+<a href="http://localhost:8888/teamrankings.php"> <strong> View Team Rankings </strong> </a>
 
 </div>
 
 <div id="playerrankings">
 
-<a href="http://localhost:8888/Page2a.php"> <strong> View Player Rankings </strong> </a>
+<a href="http://localhost:8888/playerrankings.php"> <strong> View Player Rankings </strong> </a>
 </div>
 
 <div id="adminlogin">
-<h1>Admin Login</h1>
-<style>
-    input { border: 1px solid black; }
-  </style>
-  <form method="post">
-    <font color="red"><?php echo $error_msg; ?></font><br />
-<?php if (USE_USERNAME) echo 'Username:<br /><input type="input" name="access_login" /><br />Password:<br />'; ?>
-    <input type="password" name="access_password" /><p></p><input type="submit" name="Submit" value="Submit" />
-  </form>
-  <br />
-  <a style="font-size:9px" href="http://localhost:8888/page3.php" title="Download Webpage Password Protect">Powered by Password Protect</a>
-</div>
+
+        <?php
+$user = $_POST['Username'];
+$pass = $_POST['Password'];
+
+if($user == "shane"
+&& $pass == "mcshane")
+{
+        include("adminpage.php");
+}
+else
+{
+    if(isset($_POST))
+    {?>
+
+            <form method="POST" action="index.php">
+            Please enter Admin Username:<br>
+<input type="text" name="Username">
+<br> 
+            Please enter Admin Password:<br>
+<input type="password" name="Password"> <br> 
+            <input type="submit" name="submit" value="Go"></input>
+            </form>
+    <?}
+}
+?>
+  
+  </div>      
+
+       
+    
 </body>
 </html>

@@ -94,6 +94,7 @@ public class sqlInterface {
 	}
 	
 	public static boolean changePlayersTeam (String playerName, String teamFrom, String teamTo) {
+<<<<<<< HEAD
 		String url = "jdbc:mysql://159.203.11.244:3306/filthybase";
 		String user = "filthyuser";
 		String password = "filthypass";
@@ -102,6 +103,39 @@ public class sqlInterface {
 			try (ResultSet rs = stmt.executeQuery("UPDATE players SET team='" + teamTo + "' WHERE team='" + teamFrom + "';")) {
 				connection.close();
 				if (rs != null) {
+					return true;
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;		
+	}
+	
+	public static String[] getPlayerInfo (String playerName){
+		String url = "jdbc:mysql://159.203.11.244:3306/filthybase";
+		String user = "filthyuser";
+		String password = "filthypass";
+		String[] playerInfo = new String[7];
+=======
+		String url = "jdbc:mysql://159.203.11.244:3306/filthybase";
+		String user = "filthyuser";
+		String password = "filthypass";
+>>>>>>> 4cc2e8a2901008fab3c021a28d8b08591fb78278
+		try (Connection connection = DriverManager.getConnection(url, user, password);
+				Statement stmt = connection.createStatement()) {
+			try (ResultSet rs = stmt.executeQuery("UPDATE players SET team='" + teamTo + "' WHERE team='" + teamFrom + "';")) {
+				connection.close();
+				if (rs != null) {
+<<<<<<< HEAD
+					playerInfo[0] = rs.getString(0);
+					playerInfo[1] = rs.getString(1);
+					playerInfo[2] = rs.getString(2);
+					playerInfo[3] = rs.getString(3);
+					playerInfo[4] = rs.getString(4);
+					playerInfo[5] = rs.getString(5);
+					playerInfo[6] = rs.getString(6);
+=======
 					return true;
 				}
 			}
@@ -126,6 +160,14 @@ public class sqlInterface {
 					playerInfo[3] = rs.getString(4);
 					playerInfo[4] = rs.getString(5);
 					playerInfo[5] = rs.getString(6);
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+					playerInfo[6] = rs.getString(7);
+>>>>>>> 4cc2e8a2901008fab3c021a28d8b08591fb78278
+=======
+>>>>>>> 57fe60b0487732e9a1acc056dc44c0e6f4ca1ca0
+>>>>>>> 2c6caba422a1a9a43f3dc151f92b543de1b28c77
 					return playerInfo;
 				}
 				connection.close();
