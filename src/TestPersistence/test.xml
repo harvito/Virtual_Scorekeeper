@@ -1,0 +1,53 @@
+<Manager id="1">
+  <teams id="2">
+    <Team id="3">
+      <name>Barca</name>
+      <points>0</points>
+      <players id="4">
+        <Player id="5">
+          <name>messi</name>
+          <JerseyNumber>10</JerseyNumber>
+          <height>160</height>
+          <weight>160</weight>
+          <infractions id="6">
+            <Infraction id="7">
+              <isRedCard>true</isRedCard>
+              <isYellowCard>false</isYellowCard>
+              <isOther>false</isOther>
+              <isPenalty>false</isPenalty>
+            </Infraction>
+          </infractions>
+          <shots id="8">
+            <Shot id="9">
+              <isGoal>true</isGoal>
+              <isOnTarget>true</isOnTarget>
+            </Shot>
+          </shots>
+          <team reference="3"/>
+        </Player>
+        <Player id="10">
+          <name>neymar</name>
+          <JerseyNumber>10</JerseyNumber>
+          <height>160</height>
+          <weight>160</weight>
+          <infractions id="11">
+            <Infraction id="12">
+              <isRedCard>false</isRedCard>
+              <isYellowCard>true</isYellowCard>
+              <isOther>false</isOther>
+              <isPenalty>false</isPenalty>
+            </Infraction>
+          </infractions>
+          <shots id="13">
+            <Shot id="14">
+              <isGoal>false</isGoal>
+              <isOnTarget>true</isOnTarget>
+            </Shot>
+          </shots>
+          <team reference="3"/>
+        </Player>
+      </players>
+    </Team>
+  </teams>
+  <matches id="15"/>
+</Manager>
