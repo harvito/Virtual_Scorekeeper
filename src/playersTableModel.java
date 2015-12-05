@@ -1,13 +1,16 @@
+import java.util.Arrays;
 import java.util.Vector;
 
 import javax.swing.table.AbstractTableModel;
 
+import Model.Manager;
+
 public class playersTableModel extends AbstractTableModel {
 
 	
-	private Vector<String[]> data = new Vector<String[]>(320);
+	private static Vector<String[]> data = new Vector<String[]>(320);
 	
-	public String team = "all"; //this should be deleted
+	public static String team = "all"; //this should be deleted
 	
     @Override
     public String getColumnName(int columnIndex) {
@@ -21,45 +24,57 @@ public class playersTableModel extends AbstractTableModel {
             case 3:
                 return "Weight";
             case 4:
-                return "Position";
-            case 5:
             	return "Team";
         }
         return "";  
     }	
 
-	public void updateTable() {
+	public static void updateTable() {
 		//clear the current data
 		data.clear();
 		//columntosortby=blabla //get value of dropdownbox sortby
 		team = "all";//get value of dropdownbox team
 		
 		//add all the new data to the data vector
+		int i = 0;
+		int j = 0;
+		int numOfTeams = 0;
+		int numOfPlayers = 0;
+		String playerData[] = new String[5];
 		if (team == "all") {
-			String[][] temp = new String[320][6];
-			temp = sqlInterface.getTeamsFullPlayerInfo("%");
-			int i = 0;
-			for (i=0; i <=320; i++) {
-				data.add(temp[i]);
+			numOfTeams = Manager.getInstance().numberOfTeams();
+			for (i = 0; i <= numOfTeams; i++) {
+				numOfPlayers = Manager.getInstance().getTeam(i).numberOfPlayers();
+				for (j = 0; j <= numOfPlayers; j++) {
+					playerData[0] = Manager.getInstance().getTeam(i).getPlayer(j).getName();
+					playerData[1] =	String.valueOf(Manager.getInstance().getTeam(i).getPlayer(j).getJerseyNumber());
+					playerData[2] =	String.valueOf(Manager.getInstance().getTeam(i).getPlayer(j).getHeight());
+					playerData[3] =	String.valueOf(Manager.getInstance().getTeam(i).getPlayer(j).getWeight());
+					playerData[4] =	String.valueOf(Manager.getInstance().getTeam(i).getPlayer(j).getTeam());
+					data.addElement(playerData);
+				}
+				
 			}
 		} else {
-			String[][] temp = new String[20][6];
-			temp = sqlInterface.getTeamsFullPlayerInfo(team);
-			int i = 0;
-			for (i=0; i <=20; i++) {
-				data.add(temp[i]);
+			String[] columns = new String[5];
+			columns[0] = "Player"; 
+			columns[1] = "Jersey Number";
+			columns[2] = "Height";
+			columns[3] = "Weight";
+			columns[4] = "Team";
+			int x = Arrays.asList(columns).indexOf(team);
+			numOfPlayers = Manager.getInstance().getTeam(x).numberOfPlayers();
+			for (j = 0; j <= numOfPlayers; j++) {
+				playerData[0] = Manager.getInstance().getTeam(x).getPlayer(j).getName();
+				playerData[1] =	String.valueOf(Manager.getInstance().getTeam(x).getPlayer(j).getJerseyNumber());
+				playerData[2] =	String.valueOf(Manager.getInstance().getTeam(x).getPlayer(j).getHeight());
+				playerData[3] =	String.valueOf(Manager.getInstance().getTeam(x).getPlayer(j).getWeight());
+				playerData[4] =	String.valueOf(Manager.getInstance().getTeam(x).getPlayer(j).getTeam());
+				data.addElement(playerData);
 			}
 		}
-		fireTableDataChanged();
 	}
-	/*
-	public void setValueAt(Object value, int row, int col) {
 
-	      data[row][col] = (String) value;
-	      fireTableCellUpdated(row, col);
-
-	    }
-	*/
 	/**
 	 * serialVersionUID because apparently it's necessary
 	 */
@@ -68,7 +83,7 @@ public class playersTableModel extends AbstractTableModel {
 	@Override
 	public int getColumnCount() {
 		// TODO Auto-generated method stub
-		return 7;
+		return 5;
 	}
 
 	@Override
@@ -83,13 +98,13 @@ public class playersTableModel extends AbstractTableModel {
 	
 	@Override
 	public Object getValueAt(int row, int col) {
+		
 		// TODO Auto-generated method stub
-		if (data.get(0) != null) { data.elementAt(1);
+		if (!data.isEmpty()) {
 			if (data.get(row)[col] != null) {
 				return data.get(row)[col];
-			}	
+			}
 		}
-		return "0";
+		return "";		
 	}
-
 }
