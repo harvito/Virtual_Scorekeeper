@@ -108,6 +108,11 @@ public class MainGUIWindow {
 		PlayersOptionPanel.add(lblNewLabel);
 		
 		JComboBox comboBox = new JComboBox();
+		comboBox.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//tableModel.fireTableDataChanged();
+			}
+		});
 		PlayersOptionPanel.add(comboBox);
 		
 		JLabel lblSortBy = new JLabel("Sort By:");
@@ -118,6 +123,7 @@ public class MainGUIWindow {
 		
 		JPanel panel_3 = new JPanel();
 		PlayersPanel.add(panel_3, BorderLayout.CENTER);
+
 		playersTable = new JTable(20, 6);
 		PlayersPanel.add(playersTable, BorderLayout.WEST);
 		
@@ -209,7 +215,6 @@ public class MainGUIWindow {
 		btnCreateTeam.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if (newTeamNameField.getText() != null) {
-					new Team(newTeamNameField.getText(), 0);
 					sqlInterface.addTeam(newTeamNameField.getText());
 				} else {
 					JOptionPane.showMessageDialog(null, "There was no name entered for a team!", "Error", JOptionPane.ERROR_MESSAGE);
