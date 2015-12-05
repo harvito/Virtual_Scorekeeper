@@ -14,10 +14,12 @@ import Persistence.XStreamPersistence;
 
 public class Controller 
 {
+	
 	// Constructor
 	public Controller ()
 	{	
 	}
+	
 	//Create a match
 	public Match createNewMatch (Date date, String location, String teamone, String teamtwo)
 	{
@@ -638,17 +640,51 @@ public class Controller
 		}
 	}
 
-	
-	
-
-	
-	
+	public Team[] teamRankings (String sortBy)
+	{
+		String sort = sortBy;
+		Manager manager = Manager.getInstance();
+		int i = manager.getTeams().size();
+		Team [] teams = new Team[i];
 		
+		for(int j=0; j<i;i++)
+		{
+			teams[j]= manager.getTeam(j);
+		}
 		
-	
+		if(sort=="Goals")
+		{
+			sortTeamGoals(teams);
+		}
 		
+		if(sort=="Red Cards")
+		{
+			sortTeamReds(teams);
+		}
 		
-	//Last Paranthesis	
+		if(sort=="YellowCards")
+		{
+			sortTeamYellows(teams);
+		}
+		
+		if(sort=="Other")
+		{
+			sortTeamOthers(teams);
+		}
+		
+		if(sort=="Penalty")
+		{
+			sortTeamPenalties(teams);
+		}
+		
+		if(sort=="Points")
+		{
+			sortTeamsByPoints(teams);
+		}
+		
+		return teams;
 	}
+
+}
 
 	
