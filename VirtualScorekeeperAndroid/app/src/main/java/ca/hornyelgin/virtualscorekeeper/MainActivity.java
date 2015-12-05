@@ -59,11 +59,7 @@ public class MainActivity extends AppCompatActivity {
             final int result = 1;
             startActivityForResult(liveInput, result);
         }
-        else if (id == R.id.action_admin_login) {
-            Intent adminLogin = new Intent(this, ca.hornyelgin.virtualscorekeeper.LoginActivity.class);
-            final int result = 1;
-            startActivity(adminLogin);
-        }
+
         else if (id == R.id.action_settings) {
             return true;
         }
